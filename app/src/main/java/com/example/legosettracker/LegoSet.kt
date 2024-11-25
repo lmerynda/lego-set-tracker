@@ -1,4 +1,4 @@
-package com.example.legosettracker.ui.singleset
+package com.example.legosettracker
 
 data class LegoSet(
     val title: String,

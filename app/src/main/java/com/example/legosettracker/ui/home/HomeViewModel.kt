@@ -3,8 +3,8 @@ package com.example.legosettracker.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.legosettracker.ui.singleset.LegoSet
-import com.example.legosettracker.ui.singleset.LegoSetItem
+import com.example.legosettracker.LegoSet
+import com.example.legosettracker.LegoSetItem
 
 class HomeViewModel : ViewModel() {
     val title: String = "All Lego Sets"

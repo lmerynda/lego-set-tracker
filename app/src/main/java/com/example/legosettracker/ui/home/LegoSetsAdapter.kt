@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.legosettracker.R
-import com.example.legosettracker.ui.singleset.LegoSet
+import com.example.legosettracker.LegoSet
 
 class LegoSetsAdapter(private val onItemClick: (LegoSet) -> Unit) : RecyclerView.Adapter<LegoSetsAdapter.ViewHolder>() {
     private var items: List<LegoSet> = emptyList()

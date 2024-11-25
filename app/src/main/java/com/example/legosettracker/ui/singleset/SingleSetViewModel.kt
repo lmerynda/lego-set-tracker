@@ -3,6 +3,7 @@ package com.example.legosettracker.ui.singleset
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.legosettracker.LegoSetItem
 
 class SingleSetViewModel : ViewModel() {
 

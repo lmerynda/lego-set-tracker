@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.legosettracker.R
 import com.example.legosettracker.databinding.FragmentHomeBinding
-import com.example.legosettracker.ui.singleset.LegoSet
+import com.example.legosettracker.LegoSet
 
 class HomeFragment : Fragment() {
 
