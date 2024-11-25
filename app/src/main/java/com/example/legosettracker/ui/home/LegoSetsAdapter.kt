@@ -1,18 +1,17 @@
 package com.example.legosettracker.ui.home
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.legosettracker.R
-import com.example.legosettracker.ui.singleset.SingleSet
+import com.example.legosettracker.ui.singleset.LegoSet
 
-class LegoSetsAdapter(private val onItemClick: (SingleSet) -> Unit) : RecyclerView.Adapter<LegoSetsAdapter.ViewHolder>() {
-    private var items: List<SingleSet> = emptyList()
+class LegoSetsAdapter(private val onItemClick: (LegoSet) -> Unit) : RecyclerView.Adapter<LegoSetsAdapter.ViewHolder>() {
+    private var items: List<LegoSet> = emptyList()
 
-    fun updateItems(newItems: List<SingleSet>) {
+    fun updateItems(newItems: List<LegoSet>) {
         items = newItems
         notifyDataSetChanged()
     }
@@ -28,11 +27,11 @@ class LegoSetsAdapter(private val onItemClick: (SingleSet) -> Unit) : RecyclerVi
 
     override fun getItemCount(): Int = items.size
 
-    class ViewHolder(itemView: View, private val onItemClick: (SingleSet) -> Unit) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View, private val onItemClick: (LegoSet) -> Unit) : RecyclerView.ViewHolder(itemView) {
         private val title: TextView = itemView.findViewById(R.id.singleSetTitle)
         private val count: TextView = itemView.findViewById(R.id.singleSetCount)
 
-        fun bind(item: SingleSet) {
+        fun bind(item: LegoSet) {
             title.text = item.title
             count.text = "Total brics: ${item.getBricksCount()}"
             itemView.setOnClickListener {

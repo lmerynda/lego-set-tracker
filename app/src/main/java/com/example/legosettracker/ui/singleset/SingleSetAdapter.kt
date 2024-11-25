@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.legosettracker.R
 
 class SingleSetAdapter : RecyclerView.Adapter<SingleSetAdapter.MyViewHolder>() {
-    private var items: List<SingleSetItem> = emptyList()
+    private var items: List<LegoSetItem> = emptyList()
 
-    fun updateItems(newItems: List<SingleSetItem>) {
+    fun updateItems(newItems: List<LegoSetItem>) {
         items = newItems
         notifyDataSetChanged()
     }
@@ -30,8 +30,8 @@ class SingleSetAdapter : RecyclerView.Adapter<SingleSetAdapter.MyViewHolder>() {
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val title: TextView = itemView.findViewById(R.id.singleItemLabel)
 
-        fun bind(item: SingleSetItem) {
-            title.text = item.title
+        fun bind(item: LegoSetItem) {
+            title.text = item.brickName
         }
     }
 }

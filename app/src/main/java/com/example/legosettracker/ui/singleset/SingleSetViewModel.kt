@@ -11,7 +11,7 @@ class SingleSetViewModel : ViewModel() {
     }
     val text: LiveData<String> = _text
 
-    private val _items = MutableLiveData<List<SingleSetItem>>()
-    val items: LiveData<List<SingleSetItem>> get() = _items
+    private val _items = MutableLiveData<List<LegoSetItem>>()
+    val items: LiveData<List<LegoSetItem>> get() = _items
 
 }
