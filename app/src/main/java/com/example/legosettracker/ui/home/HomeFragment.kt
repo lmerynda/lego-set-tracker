@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.legosettracker.R
 import com.example.legosettracker.databinding.FragmentHomeBinding
+import com.example.legosettracker.ui.singleset.SingleSet
 import com.example.legosettracker.ui.singleset.SingleSetAdapter
 import com.example.legosettracker.ui.singleset.SingleSetViewModel
 
@@ -35,7 +37,9 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        adapter = LegoSetsAdapter()
+        adapter = LegoSetsAdapter { singleSet ->
+            navigateToDetails(singleSet)
+        }
 
         binding.textHome.text = viewModel.title
 
@@ -45,6 +49,13 @@ class HomeFragment : Fragment() {
         viewModel.legoSets.observe(viewLifecycleOwner) { legoSets ->
             adapter.updateItems(legoSets)
         }
+    }
+
+    private fun navigateToDetails(singleSet: SingleSet) {
+        val bundle = Bundle().apply {
+            putString("legoSetId", singleSet.title)
+        }
+        findNavController().navigate(R.id.navigation_fragment_lego_set, bundle)
     }
 
     override fun onDestroyView() {
