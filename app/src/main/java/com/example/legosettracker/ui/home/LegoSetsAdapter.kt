@@ -31,9 +31,11 @@ class LegoSetsAdapter : RecyclerView.Adapter<LegoSetsAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val title: TextView = itemView.findViewById(R.id.singleSetTitle)
+        private val count: TextView = itemView.findViewById(R.id.singleSetCount)
 
         fun bind(item: SingleSet) {
             title.text = item.title
+            count.text = "Total brics: ${item.getBricksCount()}"
         }
     }
 }
