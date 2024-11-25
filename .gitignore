@@ -13,3 +13,10 @@
 .externalNativeBuild
 .cxx
 local.properties
+.project
+.idea/vcs.xml
+.settings/org.eclipse.buildship.core.prefs
+.vscode/settings.json
+app/.classpath
+app/.project
+app/.settings/org.eclipse.buildship.core.prefs
