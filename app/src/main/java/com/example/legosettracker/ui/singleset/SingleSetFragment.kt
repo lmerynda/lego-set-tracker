@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.legosettracker.LegoSet
+import com.example.legosettracker.LegoSetsData
 import com.example.legosettracker.databinding.FragmentHomeBinding
 import com.example.legosettracker.databinding.FragmentLegoSetBinding
 import com.example.legosettracker.ui.home.HomeViewModel
@@ -40,13 +42,14 @@ class SingleSetFragment : Fragment() {
 
         val legoSetId = arguments?.getString("legoSetId")
         Log.i("SingleSetFragment", "Lego set ID: $legoSetId")
+        val legoSet: LegoSet? = LegoSetsData.legoSets.find { it.title == legoSetId }
 
         binding.textView2.text = viewModel.text.toString()
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = adapter
 
         viewModel.items.observe(viewLifecycleOwner) { legoSetItems ->
-            adapter.updateItems(legoSetItems)
+            adapter.updateItems(legoSet?.items ?: emptyList())
         }
     }
 
