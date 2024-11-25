@@ -42,14 +42,19 @@ class SingleSetFragment : Fragment() {
 
         val legoSetId = arguments?.getString("legoSetId")
         Log.i("SingleSetFragment", "Lego set ID: $legoSetId")
-        val legoSet: LegoSet? = LegoSetsData.legoSets.find { it.title == legoSetId }
+        if (legoSetId != null) {
+            viewModel.setSingeSet(legoSetId)
+        }
 
-        binding.textView2.text = viewModel.text.toString()
-        binding.recyclerView.layoutManager = LinearLayoutManager(context)
-        binding.recyclerView.adapter = adapter
+        binding.legoSetItems.layoutManager = LinearLayoutManager(context)
+        binding.legoSetItems.adapter = adapter
+
+        viewModel.text.observe(viewLifecycleOwner) { newTitle ->
+            binding.legoSetTitle.text = newTitle
+        }
 
         viewModel.items.observe(viewLifecycleOwner) { legoSetItems ->
-            adapter.updateItems(legoSet?.items ?: emptyList())
+            adapter.updateItems(legoSetItems)
         }
     }
 

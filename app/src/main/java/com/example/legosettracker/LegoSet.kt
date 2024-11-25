@@ -5,7 +5,7 @@ data class LegoSet(
     val items: List<LegoSetItem>
 ){
     fun getBricksCount(): Int {
-        return items.sumOf { it.count }
+        return items.sumOf { it.totalCount }
     }
 
 }
