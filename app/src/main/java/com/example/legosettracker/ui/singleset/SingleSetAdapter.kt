@@ -3,6 +3,8 @@ package com.example.legosettracker.ui.singleset
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.legosettracker.LegoSetItem
@@ -31,11 +33,28 @@ class SingleSetAdapter : RecyclerView.Adapter<SingleSetAdapter.ViewHolder>() {
         private val title: TextView = itemView.findViewById(R.id.singleItemLabel)
         private val totalCount: TextView = itemView.findViewById(R.id.brickCount)
         private val bricksCollected: TextView = itemView.findViewById(R.id.bricksCollected)
+        private val minusButton: ImageButton = itemView.findViewById(R.id.minusButton)
+        private val plusButton: ImageButton = itemView.findViewById(R.id.plusButton)
 
         fun bind(item: LegoSetItem) {
             title.text = item.brickName
             totalCount.text = "Total: ${item.totalCount}"
             bricksCollected.text = "Collected: ${item.bricksCollected}"
+
+            plusButton.setOnClickListener {
+                if(item.bricksCollected < item.totalCount)
+                {
+                    item.bricksCollected++
+                    bricksCollected.text = "Collected: ${item.bricksCollected}"
+                }
+            }
+
+            minusButton.setOnClickListener {
+                if (item.bricksCollected > 0) {
+                    item.bricksCollected--
+                    bricksCollected.text = "Collected: ${item.bricksCollected}"
+                }
+            }
         }
     }
 }

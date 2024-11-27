@@ -26,26 +26,45 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-            <!-- Pieces Count -->
             <TextView
                 android:id="@+id/brickCount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:textSize="14sp"
-                android:text="Total: 0" />
+                android:paddingHorizontal="8dp"/>
 
-            <!-- Set Number -->
             <TextView
                 android:id="@+id/bricksCollected"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
-                android:textSize="14sp"
-                android:text="Current count: 0" />
+                android:textSize="14sp"/>
+
+            <ImageButton
+                android:id="@+id/minusButton"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="TODO"
+                android:src="@android:drawable/ic_media_previous"
+                android:scaleType="centerInside"
+                app:tint="@color/secondary_text_color" />
+
+            <ImageButton
+                android:id="@+id/plusButton"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="TODO"
+                android:src="@android:drawable/ic_media_next"
+                android:scaleType="centerInside"
+                app:tint="@color/secondary_text_color" />
         </LinearLayout>
 
     </LinearLayout>
