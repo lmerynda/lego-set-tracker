@@ -4,14 +4,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.legosettracker.LegoSet
-import com.example.legosettracker.LegoSetItem
-import com.example.legosettracker.LegoSetsData
+import com.example.legosettracker.LegoSetsStorage
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(private val legoSetsStorage: LegoSetsStorage) : ViewModel() {
     val title: String = "All Lego Sets"
 
-    private val _legoSets = MutableLiveData<List<LegoSet>>().apply {
-        value = LegoSetsData.legoSets
-    }
+    private val _legoSets = MutableLiveData<List<LegoSet>>()
     val legoSets: LiveData<List<LegoSet>> get() = _legoSets
+
+    init {
+        loadLegoSets()
+    }
+
+    private fun loadLegoSets() {
+        _legoSets.value = legoSetsStorage.getLegoSets()
+    }
 }

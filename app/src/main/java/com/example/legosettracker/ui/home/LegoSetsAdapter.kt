@@ -9,7 +9,7 @@ import com.example.legosettracker.R
 import com.example.legosettracker.LegoSet
 
 class LegoSetsAdapter(private val onItemClick: (LegoSet) -> Unit) : RecyclerView.Adapter<LegoSetsAdapter.ViewHolder>() {
-    private var items: List<LegoSet> = emptyList()
+    var items: List<LegoSet> = emptyList()
 
     fun updateItems(newItems: List<LegoSet>) {
         items = newItems

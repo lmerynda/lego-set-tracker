@@ -5,22 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.legosettracker.LegoSet
-import com.example.legosettracker.LegoSetsData
-import com.example.legosettracker.databinding.FragmentHomeBinding
 import com.example.legosettracker.databinding.FragmentLegoSetBinding
-import com.example.legosettracker.ui.home.HomeViewModel
-import com.example.legosettracker.ui.home.LegoSetsAdapter
 
 class SingleSetFragment : Fragment() {
 
     private var _binding: FragmentLegoSetBinding? = null
-
-    // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
     private lateinit var viewModel: SingleSetViewModel
@@ -37,7 +29,10 @@ class SingleSetFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(SingleSetViewModel::class.java)
+        val sharedPreferences = requireContext().getSharedPreferences("lego_sets", android.content.Context.MODE_PRIVATE)
+        viewModel = ViewModelProvider(this, SingleSetViewModelFactory(sharedPreferences)).get(
+            SingleSetViewModel::class.java)
+
         adapter = SingleSetAdapter()
 
         val legoSetId = arguments?.getString("legoSetId")
@@ -55,7 +50,18 @@ class SingleSetFragment : Fragment() {
 
         viewModel.items.observe(viewLifecycleOwner) { legoSetItems ->
             adapter.updateItems(legoSetItems)
+            saveLegoSetItems()
         }
+    }
+
+    private fun saveLegoSetItems() {
+        Log.i("SingleSetFragment", "Saving lego set items")
+        viewModel.saveLegoSet()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        saveLegoSetItems()
     }
 
     override fun onDestroyView() {

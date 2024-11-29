@@ -13,11 +13,9 @@ import com.example.legosettracker.databinding.FragmentHomeBinding
 import com.example.legosettracker.LegoSet
 
 class HomeFragment : Fragment() {
-
     private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
+
     private lateinit var viewModel: HomeViewModel
     private lateinit var adapter: LegoSetsAdapter
 
@@ -32,12 +30,12 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        adapter = LegoSetsAdapter { singleSet ->
-            navigateToDetails(singleSet)
-        }
+        val sharedPreferences = requireContext().getSharedPreferences("lego_sets", android.content.Context.MODE_PRIVATE)
+        viewModel = ViewModelProvider(this, HomeViewModelFactory(sharedPreferences)).get(HomeViewModel::class.java)
 
-        binding.textHome.text = viewModel.title
+        adapter = LegoSetsAdapter { legoSet ->
+            navigateToDetails(legoSet)
+        }
 
         binding.legoSetsView.layoutManager = LinearLayoutManager(context)
         binding.legoSetsView.adapter = adapter
@@ -45,6 +43,8 @@ class HomeFragment : Fragment() {
         viewModel.legoSets.observe(viewLifecycleOwner) { legoSets ->
             adapter.updateItems(legoSets)
         }
+
+        binding.textHome.text = viewModel.title
     }
 
     private fun navigateToDetails(legoSet: LegoSet) {
