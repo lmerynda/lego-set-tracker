@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.legosettracker.LegoSetItem
 import com.example.legosettracker.R
@@ -30,6 +32,7 @@ class SingleSetAdapter : RecyclerView.Adapter<SingleSetAdapter.ViewHolder>() {
     override fun getItemCount(): Int = items.size
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val cardView: CardView = itemView.findViewById(R.id.singleItemCardView)
         private val title: TextView = itemView.findViewById(R.id.singleItemLabel)
         private val totalCount: TextView = itemView.findViewById(R.id.brickCount)
         private val bricksCollected: TextView = itemView.findViewById(R.id.bricksCollected)
@@ -41,11 +44,22 @@ class SingleSetAdapter : RecyclerView.Adapter<SingleSetAdapter.ViewHolder>() {
             totalCount.text = "Total: ${item.totalCount}"
             bricksCollected.text = "Collected: ${item.bricksCollected}"
 
+            val context = itemView.context
+            if (item.bricksCollected >= item.totalCount) {
+                cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.green))
+            } else {
+                cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.white))
+            }
+
             plusButton.setOnClickListener {
                 if(item.bricksCollected < item.totalCount)
                 {
                     item.bricksCollected++
                     bricksCollected.text = "Collected: ${item.bricksCollected}"
+
+                    if (item.bricksCollected >= item.totalCount) {
+                        cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.green))
+                    }
                 }
             }
 
@@ -53,6 +67,11 @@ class SingleSetAdapter : RecyclerView.Adapter<SingleSetAdapter.ViewHolder>() {
                 if (item.bricksCollected > 0) {
                     item.bricksCollected--
                     bricksCollected.text = "Collected: ${item.bricksCollected}"
+
+                    // Update background dynamically
+                    if (item.bricksCollected < item.totalCount) {
+                        cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.white))
+                    }
                 }
             }
         }
